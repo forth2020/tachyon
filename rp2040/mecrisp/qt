@@ -1,0 +1,1 @@
+date +'%g%m%d DATE! %H%M%S QTIME!' > /dev/tty$1 && echo -e "\r" > /dev/tty$1

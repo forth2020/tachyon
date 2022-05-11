@@ -1,0 +1,2 @@
+minicom --color=on -w -b 921600 -D /dev/ttyACM$1
+

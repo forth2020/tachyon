@@ -1,0 +1,3 @@
+# transfer text file with extra line delay for UB3 serial
+ ascii-xfr -sn -l $3 Forth/$1.FTH > /dev/tty$2
+ date +'%g%m%d DATE! %H%M%S QTIME!' > /dev/tty$2 && echo -e "\r" > /dev/tty$2
