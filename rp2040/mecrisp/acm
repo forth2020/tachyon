@@ -1,2 +1,20 @@
+#! /bin/bash
+#
+if [ -z "$1" ]; then
+    echo Start a minicom session with the specified system
+    echo -e
+    echo Usage:
+    echo "  $0 <ACM port number>"
+    if ls /dev/ttyACM* 1> /dev/null 2>&1; then
+        echo Available ports:
+        for fn in /dev/ttyACM*; do
+            echo -n "  ${fn#*ttyACM}"
+        done
+        echo -e
+    else
+        echo No suitable ports found.
+    fi
+    exit 1
+fi
 minicom --color=on -w -b 921600 -D /dev/ttyACM$1
 
