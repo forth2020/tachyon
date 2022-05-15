@@ -46,7 +46,7 @@ R00# SAVE
 
 ## Using an SD card
 
-An SD card can be added by either using the Maker Pi Pico card or by adding a discrete card socket to the GP10-GP15 ports.
+An SD card can be added by either using the Maker Pi Pico card or by adding a discrete card socket to the GP10-GP19 ports although any random port pins may be used as pins are bit-bashed and assignable with SDPINS.
 
 Insert a FAT32 SD card - preferably blank or just 8.3 files but optional load the latest on-going incomplete HELP file onto the card.  
 
