@@ -1,3 +1,41 @@
+#! /bin/bash
+#
 # transfer text file with extra line delay for UB3 serial
+if [ -z "$1" ]; then
+    echo Send a Forth module to the target system via the specified serial port
+    echo -e
+    echo Usage:
+    echo "  $0 <Forth module> <serial port number> <line delay>"
+    echo "    The forth module should reside in the Forth directory and should not specify the .FTH extension"
+    echo "    The serial port should fully reflect ACM or USB followed by a digit"
+    echo "    The line delay is specified in milliseconds"
+    if ls ./Forth/*.FTH 1> /dev/null 2>&1; then
+        echo Forth modules:
+        for fn in ./Forth/*.FTH; do
+            fn_=${fn#*Forth/}
+            echo -n "  ${fn_%.FTH}"
+        done
+        echo -e
+    else
+        echo No Forth modules found.
+        exit 1
+    fi
+    p_found=0
+    for fl in "/dev/ttyACM" "/dev/ttyUSB"; do
+        if ls $fl* 1> /dev/null 2>&1; then
+            echo Available ports:
+            for fn in $fl*; do
+                echo -n "  ${fn#*tty}"
+            done
+            p_found=1
+        fi
+    done
+    if [ $p_found -eq 1 ]; then
+        echo -e
+    else
+        echo No suitable ports found.
+    fi
+    exit 1
+fi
  ascii-xfr -sn -l $3 Forth/$1.FTH > /dev/tty$2
  date +'%g%m%d DATE! %H%M%S QTIME!' > /dev/tty$2 && echo -e "\r" > /dev/tty$2
